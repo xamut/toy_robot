@@ -27,4 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake",                       "~> 11.0"
   spec.add_development_dependency "rspec",                      "~> 3.6"
   spec.add_development_dependency "simplecov",                  "~> 0.12"
+
+  spec.add_runtime_dependency "thor",                           "~> 0.19"
 end

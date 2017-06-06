@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'toy_robot'
+require "toy_robot"
+
+ToyRobot::CLI.start
