@@ -29,10 +29,10 @@ module ToyRobot
     def start
       file = options[:file]
       interface = if file
-        Interfaces::FileInterface.new(file)
-      else
-        Interfaces::InteractiveInterface.new
-      end
+                    Interfaces::FileInterface.new(file)
+                  else
+                    Interfaces::InteractiveInterface.new
+                  end
 
       surface = ToyRobot::Surface.new(options[:length], options[:width])
       ToyRobot::Robot.new(interface, surface).start
