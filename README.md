@@ -22,3 +22,11 @@ currently facing.
 direction without changing the position of the robot.
 - `REPORT` will announce the `x`,`y` and `facing` of the robot.
 - Input can be from a file or from standard input.
+
+### Installation
+```bash
+git clone https://github.com/xamut/toy_robot.git
+cd toy_robot
+bin/setup
+bin/toy_robot help start
+```

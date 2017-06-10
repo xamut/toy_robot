@@ -1,6 +1,6 @@
 module ToyRobot
   class Robot
-    attr_reader :x, :y, :facing, :surface
+    attr_reader :x, :y, :facing, :surface, :interface
 
     def initialize(interface, surface)
       @interface = interface
@@ -11,15 +11,19 @@ module ToyRobot
     end
 
     def start
+      interface.commands do |command|
+        send(*command)
+      end
     end
 
     def place(x, y, facing)
+      x = x.to_i
+      y = y.to_i
+
       if surface.placement_is_allowed?(x, y)
         @x = x
         @y = y
         @facing = facing
-      else
-        puts "Placement is not allowed!"
       end
     end
 
@@ -41,7 +45,7 @@ module ToyRobot
 
     def report
       return unless placed?
-      puts [x, y, facing].join(", ")
+      puts [x, y, facing].join(",")
     end
 
     private

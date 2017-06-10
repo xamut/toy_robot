@@ -1,6 +1,6 @@
 RSpec.describe ToyRobot::Robot do
   let(:interface) { double(:interface) }
-  let(:surface) { ToyRobot::Surface.new(10, 10) }
+  let(:surface) { ToyRobot::Surface.new(100, 100) }
 
   subject { described_class.new(interface, surface) }
 
@@ -26,12 +26,6 @@ RSpec.describe ToyRobot::Robot do
       let(:y) { 100 }
       let(:facing) { "WEST" }
 
-      before do
-        expect(surface).to receive(:placement_is_allowed?)
-          .with(x, y)
-          .and_return(true)
-      end
-
       it "set x coordinate" do
         expect { call_method }.to change { subject.x }.from(nil).to(x)
       end
@@ -49,16 +43,6 @@ RSpec.describe ToyRobot::Robot do
       let(:x) { 1_000 }
       let(:y) { -100 }
       let(:facing) { nil }
-
-      before do
-        expect(surface).to receive(:placement_is_allowed?)
-          .with(x, y)
-          .and_return(false)
-      end
-
-      it "print message about problem" do
-        expect { call_method }.to output("Placement is not allowed!\n").to_stdout
-      end
 
       it_behaves_like "coordinates are not changed"
     end
@@ -183,7 +167,7 @@ RSpec.describe ToyRobot::Robot do
       end
 
       it "print current coordinates and facing" do
-        expect { call_method }.to output("0, 0, WEST\n").to_stdout
+        expect { call_method }.to output("0,0,WEST\n").to_stdout
       end
     end
 

@@ -1,15 +1,19 @@
 RSpec.describe ToyRobot::CLI do
   describe "#start" do
-    let(:length) { 10 }
-    let(:width) { 10 }
+    let(:length)  { 10 }
+    let(:width)   { 10 }
 
     before do
       subject.options = { length: length, width: width }
+      allow_any_instance_of(ToyRobot::Robot).to receive(:start)
     end
 
     context "in interactive mode" do
+      let(:input)   { STDIN }
+
       it "execute interactive interface" do
-        expect(ToyRobot::Interfaces::InteractiveInterface).to receive(:new)
+        expect(ToyRobot::Interface).to receive(:new)
+          .with(input)
           .and_call_original
 
         expect(ToyRobot::Surface).to receive(:new)
@@ -18,7 +22,7 @@ RSpec.describe ToyRobot::CLI do
 
         expect(ToyRobot::Robot).to receive(:new)
           .with(
-            instance_of(ToyRobot::Interfaces::InteractiveInterface),
+            instance_of(ToyRobot::Interface),
             instance_of(ToyRobot::Surface)
           )
           .and_call_original
@@ -28,14 +32,16 @@ RSpec.describe ToyRobot::CLI do
     end
 
     context "in file mode" do
-      let(:file_path) { '/foo/bar' }
+      let(:file_path) { "examples/commands_1.txt" }
+
       before do
         subject.options[:file] = file_path
       end
 
       it "execute file interface" do
-        expect(ToyRobot::Interfaces::FileInterface).to receive(:new)
-          .with(file_path).and_call_original
+        expect(ToyRobot::Interface).to receive(:new)
+          .with(instance_of(File))
+          .and_call_original
 
         expect(ToyRobot::Surface).to receive(:new)
           .with(length, width)
@@ -43,7 +49,7 @@ RSpec.describe ToyRobot::CLI do
 
         expect(ToyRobot::Robot).to receive(:new)
           .with(
-            instance_of(ToyRobot::Interfaces::FileInterface),
+            instance_of(ToyRobot::Interface),
             instance_of(ToyRobot::Surface)
           )
           .and_call_original

@@ -27,14 +27,12 @@ module ToyRobot
       type: :numeric
 
     def start
-      file = options[:file]
-      interface = if file
-                    Interfaces::FileInterface.new(file)
-                  else
-                    Interfaces::InteractiveInterface.new
-                  end
+      file    = options[:file]
+      input   = file.nil? ? STDIN : File.open(file)
 
+      interface = ToyRobot::Interface.new(input)
       surface = ToyRobot::Surface.new(options[:length], options[:width])
+
       ToyRobot::Robot.new(interface, surface).start
     rescue => e
       puts e.message
