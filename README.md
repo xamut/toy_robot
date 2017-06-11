@@ -1,5 +1,7 @@
 # Toy Robot Simulator
 
+[![Ruby](https://img.shields.io/badge/ruby-2.4.1-green.svg)](https://www.ruby-lang.org/en/downloads/)
+[![Bundler](https://img.shields.io/badge/bundler-1.15.1-green.svg)](http://bundler.io)
 [![Build Status](https://travis-ci.org/xamut/toy_robot.svg?branch=master)](https://travis-ci.org/xamut/toy_robot)
 [![Code Climate](https://codeclimate.com/github/xamut/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/xamut/toy_robot)
 [![Test Coverage](https://codeclimate.com/github/xamut/toy_robot/badges/coverage.svg)](https://codeclimate.com/github/xamut/toy_robot/coverage)
