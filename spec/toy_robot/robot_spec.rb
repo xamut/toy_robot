@@ -1,5 +1,6 @@
 RSpec.describe ToyRobot::Robot do
-  let(:interface) { double(:interface) }
+  let(:input) { StringIO.new }
+  let(:interface) { ToyRobot::Interface.new(input) }
   let(:surface) { ToyRobot::Surface.new(100, 100) }
 
   subject { described_class.new(interface, surface) }
@@ -15,6 +16,20 @@ RSpec.describe ToyRobot::Robot do
   shared_examples "message are not printed" do
     it do
       expect { call_method }.to_not output(" , , ").to_stdout
+    end
+  end
+
+  describe "#start" do
+    let(:call_method) { subject.start }
+
+    before do
+      input.string = "REPORT"
+    end
+
+    it "takes commends from interface" do
+      expect(interface).to receive(:commands).and_call_original
+
+      call_method
     end
   end
 

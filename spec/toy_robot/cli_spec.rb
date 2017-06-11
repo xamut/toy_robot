@@ -57,6 +57,15 @@ RSpec.describe ToyRobot::CLI do
         subject.start
       end
     end
+
+    context "raise error" do
+      let(:length) { -100 }
+
+      it "print error message to stdout" do
+        error_message = "Wrong length, must be in range 1 to 100\n"
+        expect { subject.start }.to output(error_message).to_stdout
+      end
+    end
   end
 end
 
