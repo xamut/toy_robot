@@ -28,5 +28,14 @@ direction without changing the position of the robot.
 git clone https://github.com/xamut/toy_robot.git
 cd toy_robot
 bin/setup
-bin/toy_robot help start
 ```
+
+### Usage
+```bash
+bin/toy_robot help start
+bin/toy_robot start                             # Start toy robot with default settings
+bin/toy_robot start -f FILE                     # Start toy robot with default settings and read commands from file
+bin/toy_robot start -f examples/commands_1.txt  # Start toy robot with default settings and read commands from file
+bin/toy_robot start -l 10 -w 10                 # Start toy robot with length of 10 units and width of 10 units
+```
+
