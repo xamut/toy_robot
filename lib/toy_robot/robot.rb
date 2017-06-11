@@ -20,7 +20,7 @@ module ToyRobot
       x = x.to_i
       y = y.to_i
 
-      if surface.placement_is_allowed?(x, y)
+      if surface.placement_is_allowed?(x, y, facing)
         @x = x
         @y = y
         @facing = facing

@@ -96,27 +96,40 @@ RSpec.describe ToyRobot::Surface do
     context "takes acceptable coordinates" do
       let(:x) { 3 }
       let(:y) { 3 }
+      let(:facing) { "WEST" }
 
       it "truthy" do
-        expect(subject.placement_is_allowed?(x, y)).to be_truthy
+        expect(subject.placement_is_allowed?(x, y, facing)).to be_truthy
       end
     end
 
     context "takes coordinates beyond the limit" do
       let(:x) { 3 }
       let(:y) { 6 }
+      let(:facing) { "EAST" }
 
       it "falsey" do
-        expect(subject.placement_is_allowed?(x, y)).to be_falsey
+        expect(subject.placement_is_allowed?(x, y, facing)).to be_falsey
       end
     end
 
     context "takes negative coordinates" do
       let(:x) { -3 }
       let(:y) { 5 }
+      let(:facing) { "SOUTH" }
 
       it "falsey" do
-        expect(subject.placement_is_allowed?(x, y)).to be_falsey
+        expect(subject.placement_is_allowed?(x, y, facing)).to be_falsey
+      end
+    end
+
+    context "takes not allowed facing" do
+      let(:x) { 3 }
+      let(:y) { 5 }
+      let(:facing) { "NORT" }
+
+      it "falsey" do
+        expect(subject.placement_is_allowed?(x, y, facing)).to be_falsey
       end
     end
   end

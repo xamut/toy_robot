@@ -4,7 +4,7 @@ RSpec.describe ToyRobot::Robot do
 
   subject { described_class.new(interface, surface) }
 
-  shared_examples "coordinates are not changed" do
+  shared_examples "coordinates and facing are not changed" do
     it do
       expect { call_method }.to_not change { subject.x }
       expect { call_method }.to_not change { subject.y }
@@ -39,12 +39,20 @@ RSpec.describe ToyRobot::Robot do
       end
     end
 
-    context "placement is not allowed" do
+    context "coordinates is not allowed" do
       let(:x) { 1_000 }
       let(:y) { -100 }
-      let(:facing) { nil }
+      let(:facing) { "NORTH" }
 
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
+    end
+
+    context "facing is not allowed" do
+      let(:x) { 2 }
+      let(:y) { 2 }
+      let(:facing) { "NORT" }
+
+      it_behaves_like "coordinates and facing are not changed"
     end
   end
 
@@ -82,12 +90,12 @@ RSpec.describe ToyRobot::Robot do
         subject.place(x, y, facing)
       end
 
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
       it_behaves_like "message are not printed"
     end
 
     context "robot is not placed on surface" do
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
       it_behaves_like "message are not printed"
     end
   end
@@ -118,7 +126,7 @@ RSpec.describe ToyRobot::Robot do
     end
 
     context "robot is not placed on surface" do
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
       it_behaves_like "message are not printed"
     end
   end
@@ -149,7 +157,7 @@ RSpec.describe ToyRobot::Robot do
     end
 
     context "robot is not placed on surface" do
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
       it_behaves_like "message are not printed"
     end
   end
@@ -172,7 +180,7 @@ RSpec.describe ToyRobot::Robot do
     end
 
     context "robot is not placed on surface" do
-      it_behaves_like "coordinates are not changed"
+      it_behaves_like "coordinates and facing are not changed"
       it_behaves_like "message are not printed"
     end
   end

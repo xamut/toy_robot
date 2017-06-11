@@ -23,13 +23,15 @@ module ToyRobot
       @width  = width
     end
 
-    def placement_is_allowed?(x, y)
-      x >= 0 && x <= @length && y >= 0 && y <= @width
+    def placement_is_allowed?(x, y, facing)
+      x >= 0 && x <= @length &&
+        y >= 0 && y <= @width &&
+          facings.include?(facing)
     end
 
     def step_from_is_allowed?(x, y, facing)
       coordinates = coordinates_next_step_from(x, y, facing)
-      placement_is_allowed?(*coordinates)
+      placement_is_allowed?(*coordinates, facing)
     end
 
     def coordinates_next_step_from(x, y, facing)
