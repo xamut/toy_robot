@@ -35,12 +35,12 @@ module ToyRobot
 
     def left
       return unless placed?
-      @facing = surface.facings.rotate(surface.facings.index(facing) - 1).first
+      @facing = surface.facing_from(facing, :to_left)
     end
 
     def right
       return unless placed?
-      @facing = surface.facings.rotate(surface.facings.index(facing) + 1).first
+      @facing = surface.facing_from(facing, :to_right)
     end
 
     def report

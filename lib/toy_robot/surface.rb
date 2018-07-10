@@ -2,6 +2,7 @@ module ToyRobot
   class Surface
     class WrongLength < StandardError; end
     class WrongWidth < StandardError; end
+    class WrongDirection < StandardError; end
 
     TRANSITION_MATRIX = {
       NORTH: [0,  1],
@@ -21,6 +22,17 @@ module ToyRobot
 
       @length = length
       @width  = width
+    end
+
+    def facing_from(current_facing, direction)
+      case direction
+      when :to_left
+        facings.rotate(facings.index(current_facing) - 1).first
+      when :to_right
+        facings.rotate(facings.index(current_facing) + 1).first
+      else
+        raise WrongDirection, 'Wrong direction'
+      end
     end
 
     def placement_is_allowed?(x, y, facing)
